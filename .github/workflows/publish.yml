@@ -11,6 +11,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -24,8 +29,6 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: maratumba/postgis-tr
-      - name: Check
-        run: echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
       - name: install buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
@@ -34,5 +37,5 @@ jobs:
       - name: build the image
         run: |
           docker buildx build --push \
-            --tag maratumba/${{ env.IMAGE_NAME}}:latest \
+            --tag maratumba/postgis-tr:latest \
             --platform linux/amd64,linux/arm64 .
