@@ -25,8 +25,7 @@ jobs:
         with:
           images: maratumba/postgis-tr
       - name: Check
-        run: echo '${{ steps.meta.outputs.tags }}' '${{ steps.meta.outputs.labels }}' && \
-          echo '${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest'
+        run: echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
       - name: install buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
