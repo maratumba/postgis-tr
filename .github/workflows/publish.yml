@@ -7,6 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  VERSION: 3.5.0
 
 jobs:
   build:
@@ -38,4 +39,5 @@ jobs:
         run: |
           docker buildx build --push \
             --tag maratumba/postgis-tr:latest \
+            --tag maratumba/postgis-tr:${{ env.VERSION }} \
             --platform linux/amd64,linux/arm64 .
